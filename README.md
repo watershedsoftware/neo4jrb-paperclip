@@ -1,4 +1,4 @@
-Neo4jrb::Paperclip - Making Paperclip play nice with Neo4j.rb
+Neo4jrb::Paperclip - Making Paperclip play nice with Neo4j.rb 3.0
 ================================================================
 
 This gem is based on [mongoid-paperclip 0.0.4](https://github.com/meskyanichi/mongoid-paperclip). It is a fork of Leo Lou's original gem, updated for Neo4j.rb 3.0. It is platform-independent and compatible with Paperclip 4.2.0.
