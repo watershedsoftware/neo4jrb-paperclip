@@ -8,12 +8,13 @@ rescue LoadError
 end
 
 ##
-# Use Neo4j's logger.
+# TODO
+# Fix this
 module Paperclip
   class << self
-    def logger
-      Neo4j::Config[:logger]
-    end
+    # def logger
+    #   Neo4j::Config[:logger]
+    # end
   end
 end
 
@@ -28,6 +29,7 @@ end
 #    include Neo4jrb::Paperclip
 #
 #    has_neo4jrb_attached_file :avatar
+#    validates_attachment_content_type :avatar, content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 #  end
 #
 # The above example is all you need to do. This will load the Paperclip library into the User model
@@ -45,14 +47,30 @@ end
 #
 module Neo4jrb 
   module Paperclip
-
-    ##
-    # Extends the model with the defined Class methods
-    def self.included(base)
-      base.extend(ClassMethods)
-    end
+    extend ActiveSupport::Concern
+    include ::Paperclip::Validators
 
     module ClassMethods
+
+      ##
+      # Adds after_commit
+      def after_commit(*args, &block)
+        options = args.pop if args.last.is_a? Hash
+        if options
+          case options[:on]
+          when :create
+            after_create(*args, &block)
+          when :update
+            after_update(*args, &block)
+          when :destroy
+            after_destroy(*args, &block)
+          else
+            after_save(*args, &block)
+          end
+        else
+          after_save(*args, &block)
+        end
+      end
 
       ##
       # Adds Neo4jrb::Paperclip's "#has_neo4jrb_attached_file" class method to the model
@@ -73,10 +91,10 @@ module Neo4jrb
 
         ##
         # Define the necessary collection fields in Neo4jrb for Paperclip
-        property :"#{field}_file_name",    :type => String
-        property :"#{field}_content_type", :type => String
-        property :"#{field}_file_size",    :type => Fixnum 
-        property :"#{field}_updated_at",   :type => DateTime
+        property :"#{field}_file_name",    type: String
+        property :"#{field}_content_type", type: String
+        property :"#{field}_file_size",    type: Integer
+        property :"#{field}_updated_at",   type: DateTime
       end
 
       ##
