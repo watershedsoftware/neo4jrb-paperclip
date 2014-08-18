@@ -3,12 +3,12 @@
 Gem::Specification.new do |gem|
 
   gem.name        = 'neo4jrb-paperclip'
-  gem.version     = '0.0.2'
+  gem.version     = '0.0.2.2'
   gem.authors     = 'Leo Lou, Chris Grigg'
   gem.email       = 'louyuhong@gmail.com, chris@subvertallmedia.com'
   gem.homepage    = 'https://github.com/subvertallchris/neo4jrb-paperclip'
   gem.summary     = 'Neo4jrb::Paperclip enables you to use Paperclip with Neo4j.rb'
-  gem.description = 'Neo4jrb::Paperclip enables you to use Paperclip with Neo4j.rb, updated for Neo4j.rb 3.0. Originally by LL, updated by CG.'
+  gem.description = 'Neo4jrb::Paperclip enables you to use Paperclip with Neo4j.rb'
   gem.license     = 'MIT'
 
   gem.files         = %x[git ls-files].split("\n")
