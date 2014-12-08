@@ -1,0 +1,2 @@
+== 0.0.3
+* Relaxed gemspec requirements. Just use a kind of modern version of the Neo4j Ruby gem.
