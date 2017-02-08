@@ -1,2 +1,5 @@
+== 0.0.4
+* Allow both paperclip 4 and 5 (thanks @jacob-ewald / see #6)
+
 == 0.0.3
 * Relaxed gemspec requirements. Just use a kind of modern version of the Neo4j Ruby gem.
